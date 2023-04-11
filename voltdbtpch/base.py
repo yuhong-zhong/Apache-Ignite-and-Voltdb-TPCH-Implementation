@@ -241,12 +241,15 @@ class voltdbtpchrunner:
 		cur.close()
 
 
-	def run_queries(self):
+	def run_queries(self, query=None):
 		cur = self.conn.get_cursor()
 		numruns = self.conf.get('numruns')
 		tpch_queries = self.conf.get('tpch_queries')
 
-		query_nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
+		if query is None:
+			query_nums = [1, 2, 3, 4, 5, 6, 10, 12, 13, 14, 16, 17, 18, 20, 21]
+		else:
+			query_nums = [query]
 		#queries 2, 16, 20, 22 slow
 		#queries 11, 15 - contains not-supported elements in Voltdb
 
